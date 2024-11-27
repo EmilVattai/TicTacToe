@@ -157,16 +157,96 @@ while (isGameRun) {
       }
    } else {
       // AI
+      if (gameField[1][1] === ' ') {
+         gameField[1][1] = actualPlayer;
+      }
+      else if (gameField[0][0] === gameField[0][1]) {
+         gameField[0][2] = actualPlayer;
+      }
+      else if (gameField[0][1] === gameField[0][2]) {
+         gameField[0][0] = actualPlayer;
+      }
+      else if (gameField[0][0] === gameField[0][2]) {
+         gameField[0][1] = actualPlayer;
+      }
+      else if (gameField[1][0] === gameField[1][1]) {
+         gameField[1][2] = actualPlayer;
+      }
+      else if (gameField[1][0] === gameField[1][2]) {
+         gameField[1][1] = actualPlayer;
+      }
+      else if (gameField[1][1] === gameField[1][2]) {
+         gameField[1][0] = actualPlayer;
+      }
+      else if (gameField[2][0] === gameField[2][1]) {
+         gameField[2][2] = actualPlayer;
+      }
+      else if (gameField[2][0] === gameField[2][2]) {
+         gameField[2][1] = actualPlayer;
+      }
+      else if (gameField[2][1] === gameField[2][2]) {
+         gameField[2][0] = actualPlayer;
+      }
+      else if (gameField[0][0] === gameField[1][0]) {
+         gameField[2][0] = actualPlayer;
+      }
+      else if (gameField[0][0] === gameField[2][0]) {
+         gameField[1][0] = actualPlayer;
+      }
+      else if (gameField[1][0] === gameField[2][0]) {
+         gameField[0][0] = actualPlayer;
+      }
+      else if (gameField[0][1] === gameField[1][1]) {
+         gameField[2][1] = actualPlayer;
+      }
+      else if (gameField[0][2] === gameField[1][2]) {
+         gameField[2][2] = actualPlayer;
+      }
+      else if (gameField[0][2] === gameField[2][2]) {
+         gameField[1][2] = actualPlayer;
+      }
+      else if (gameField[1][2] === gameField[2][2]) {
+         gameField[0][2] = actualPlayer;
+      }
+      else if (gameField[0][0] === gameField[1][1]) {
+         gameField[2][2] = actualPlayer;
+      }
+      else if (gameField[0][0] === gameField[2][2]) {
+         gameField[1][1] = actualPlayer;
+      }
+      else if (gameField[1][1] === gameField[2][2]) {
+         gameField[0][0] = actualPlayer;
+      }
+      else if (gameField[2][0] === gameField[1][1]) {
+         gameField[0][2] = actualPlayer;
+      }
+      else if (gameField[2][0] === gameField[0][2]) {
+         gameField[1][1] = actualPlayer;
+      }
+      else if (gameField[1][1] === gameField[0][2]) {
+         gameField[2][0] = actualPlayer;
+      } else {
+        gameField[0][0] = actualPlayer;
+      }
 
 
 
 
+
+
+      
+
+
+
+
+   actualPlayer = actualPlayer === 'X' ? 'O' : 'X';
    }
 
    isWin = isGameWin();  
    if(isWin) {
       isGameRun = false;
    }
+
 }
 
 
