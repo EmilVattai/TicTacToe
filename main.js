@@ -6,6 +6,14 @@ let errorMessage = '';
 let actualPlayer = '';
 let humanPlayers = 0;
 
+/*
+const x = 'X';
+console.log(x);
+console.log(!x);
+const incccput = prompt('Kérek egy mezőt [' + actualPlayer + ']:');
+*/
+
+
 let playerInfo = [
    {
       character: ' ',
@@ -19,6 +27,8 @@ let playerInfo = [
 
 let isWin = false;
 let winnerPlayer = '';
+
+let EmptySpace = true;
 
 let gameField = [
    [ ' ',' ',' '],
@@ -72,6 +82,15 @@ function isGameWin() {
    }
 }
 
+function isEmptySpace() {
+   for (let i = 0; i < 3; i++){
+      for (let j = 0; j < 3; j++) {
+         if (gameField[i][j] === ' ') return true;
+      }
+   }
+   return false;
+}
+
 function printError(errorMsg) {
    if (errorMessage !== '') {
       console.log('Hiba: ' + errorMsg);
@@ -87,6 +106,12 @@ function isActualPlayerHum(actualChar) {
       return playerInfo[1].isHumanoid;
    }
 }
+
+function getAnotherPlayer(actPlayer) {
+   if (actPlayer === 'X') return 'O';
+   else if (actPlayer === 'O') return 'X';
+}
+
 
 /*
       A   B   C
@@ -107,8 +132,7 @@ while(gameNotRun) {
    } else {
       if (inpPlayerNum === '1') {
          playerInfo[0].isHumanoid = true;
-      }
-      else {
+      } else {
          playerInfo[0].isHumanoid = true;
          playerInfo[1].isHumanoid = true;
       }
@@ -160,93 +184,171 @@ while (isGameRun) {
       if (gameField[1][1] === ' ') {
          gameField[1][1] = actualPlayer;
       }
-      else if (gameField[0][0] === gameField[0][1]) {
+      // AI want to win...
+      else if (gameField[0][0] === gameField[0][1] && gameField[0][0] === actualPlayer && gameField[0][2] === ' ') {
          gameField[0][2] = actualPlayer;
       }
-      else if (gameField[0][1] === gameField[0][2]) {
+      else if (gameField[0][1] === gameField[0][2] && gameField[0][1] === actualPlayer && gameField[0][0] === ' ') {
          gameField[0][0] = actualPlayer;
       }
-      else if (gameField[0][0] === gameField[0][2]) {
+      else if (gameField[0][0] === gameField[0][2] && gameField[0][0] === actualPlayer && gameField[0][1] === ' ') {
          gameField[0][1] = actualPlayer;
       }
-      else if (gameField[1][0] === gameField[1][1]) {
+      else if (gameField[1][0] === gameField[1][1] && gameField[1][0] === actualPlayer && gameField[1][2] === ' ') {
          gameField[1][2] = actualPlayer;
       }
-      else if (gameField[1][0] === gameField[1][2]) {
+      else if (gameField[1][0] === gameField[1][2] && gameField[1][0] === actualPlayer && gameField[1][1] === ' ') {
          gameField[1][1] = actualPlayer;
       }
-      else if (gameField[1][1] === gameField[1][2]) {
+      else if (gameField[1][1] === gameField[1][2] && gameField[1][1] === actualPlayer && gameField[1][0] === ' ') {
          gameField[1][0] = actualPlayer;
       }
-      else if (gameField[2][0] === gameField[2][1]) {
+      else if (gameField[2][0] === gameField[2][1] && gameField[2][0] === actualPlayer && gameField[2][2] === ' ') {
          gameField[2][2] = actualPlayer;
       }
-      else if (gameField[2][0] === gameField[2][2]) {
+      else if (gameField[2][0] === gameField[2][2] && gameField[2][0] === actualPlayer && gameField[2][1] === ' ') {
          gameField[2][1] = actualPlayer;
       }
-      else if (gameField[2][1] === gameField[2][2]) {
+      else if (gameField[2][1] === gameField[2][2] && gameField[2][1] === actualPlayer && gameField[2][0] === ' ') {
          gameField[2][0] = actualPlayer;
       }
-      else if (gameField[0][0] === gameField[1][0]) {
+      else if (gameField[0][0] === gameField[1][0] && gameField[0][0] === actualPlayer && gameField[2][0] === ' ') {
          gameField[2][0] = actualPlayer;
       }
-      else if (gameField[0][0] === gameField[2][0]) {
+      else if (gameField[0][0] === gameField[2][0] && gameField[0][0] === actualPlayer && gameField[1][0] === ' ') {
          gameField[1][0] = actualPlayer;
       }
-      else if (gameField[1][0] === gameField[2][0]) {
+      else if (gameField[1][0] === gameField[2][0] && gameField[1][0] === actualPlayer && gameField[0][0] === ' ') {
          gameField[0][0] = actualPlayer;
       }
-      else if (gameField[0][1] === gameField[1][1]) {
+      else if (gameField[0][1] === gameField[1][1] && gameField[0][1] === actualPlayer && gameField[2][1] === ' ') {
          gameField[2][1] = actualPlayer;
       }
-      else if (gameField[0][2] === gameField[1][2]) {
+      else if (gameField[0][2] === gameField[1][2] && gameField[0][2] === actualPlayer && gameField[2][2] === ' ') {
          gameField[2][2] = actualPlayer;
       }
-      else if (gameField[0][2] === gameField[2][2]) {
+      else if (gameField[0][2] === gameField[2][2] && gameField[0][2] === actualPlayer && gameField[1][2] === ' ') {
          gameField[1][2] = actualPlayer;
       }
-      else if (gameField[1][2] === gameField[2][2]) {
+      else if (gameField[1][2] === gameField[2][2] && gameField[1][2] === actualPlayer && gameField[0][2] === ' ') {
          gameField[0][2] = actualPlayer;
       }
-      else if (gameField[0][0] === gameField[1][1]) {
+      else if (gameField[0][0] === gameField[1][1] && gameField[0][0] === actualPlayer && gameField[2][2] === ' ') {
          gameField[2][2] = actualPlayer;
       }
-      else if (gameField[0][0] === gameField[2][2]) {
+      else if (gameField[0][0] === gameField[2][2] && gameField[0][0] === actualPlayer && gameField[1][1] === ' ') {
          gameField[1][1] = actualPlayer;
       }
-      else if (gameField[1][1] === gameField[2][2]) {
+      else if (gameField[1][1] === gameField[2][2] && gameField[1][1] === actualPlayer && gameField[0][0] === ' ') {
          gameField[0][0] = actualPlayer;
       }
-      else if (gameField[2][0] === gameField[1][1]) {
+      else if (gameField[2][0] === gameField[1][1] && gameField[2][0] === actualPlayer && gameField[0][2] === ' ') {
          gameField[0][2] = actualPlayer;
       }
-      else if (gameField[2][0] === gameField[0][2]) {
+      else if (gameField[2][0] === gameField[0][2] && gameField[2][0] === actualPlayer && gameField[1][1] === ' ') {
          gameField[1][1] = actualPlayer;
       }
-      else if (gameField[1][1] === gameField[0][2]) {
+      else if (gameField[1][1] === gameField[0][2] && gameField[1][1] === actualPlayer && gameField[2][0] === ' ') {
          gameField[2][0] = actualPlayer;
-      } else {
-        gameField[0][0] = actualPlayer;
+      }
+      // AI want to block...
+      else if (gameField[0][0] === gameField[0][1] && gameField[0][0] === getAnotherPlayer(actualPlayer) && gameField[0][2] === ' ') {
+         gameField[0][2] = actualPlayer;
+      }
+      else if (gameField[0][1] === gameField[0][2] && gameField[0][1] === getAnotherPlayer(actualPlayer) && gameField[0][0] === ' ') {
+         gameField[0][0] = actualPlayer;
+      }
+      else if (gameField[0][0] === gameField[0][2] && gameField[0][0] === getAnotherPlayer(actualPlayer) && gameField[0][1] === ' ') {
+         gameField[0][1] = actualPlayer;
       }
 
+      else if (gameField[1][0] === gameField[1][1] && gameField[1][0] === getAnotherPlayer(actualPlayer) && gameField[1][2] === ' ') {
+         gameField[1][2] = actualPlayer;
+      }
+      else if (gameField[1][0] === gameField[1][2] && gameField[1][0] === getAnotherPlayer(actualPlayer) && gameField[1][1] === ' ') {
+         gameField[1][1] = actualPlayer;
+      }
+      else if (gameField[1][1] === gameField[1][2] && gameField[1][1] === getAnotherPlayer(actualPlayer) && gameField[1][0] === ' ') {
+         gameField[1][0] = actualPlayer;
+      }
 
-
-
-
-
+      else if (gameField[2][0] === gameField[2][1] && gameField[2][0] === getAnotherPlayer(actualPlayer) && gameField[2][2] === ' ') {
+         gameField[2][2] = actualPlayer;
+      }
+      else if (gameField[2][0] === gameField[2][2] && gameField[2][0] === getAnotherPlayer(actualPlayer) && gameField[2][1] === ' ') {
+         gameField[2][1] = actualPlayer;
+      }
+      else if (gameField[2][1] === gameField[2][2] && gameField[2][1] === getAnotherPlayer(actualPlayer) && gameField[2][0] === ' ') {
+         gameField[2][0] = actualPlayer;
+      }
       
+      else if (gameField[0][0] === gameField[1][0] && gameField[0][0] === getAnotherPlayer(actualPlayer) && gameField[2][0] === ' ') {
+         gameField[2][0] = actualPlayer;
+      }
+      else if (gameField[0][0] === gameField[2][0] && gameField[0][0] === getAnotherPlayer(actualPlayer) && gameField[1][0] === ' ') {
+         gameField[1][0] = actualPlayer;
+      }
+      else if (gameField[1][0] === gameField[2][0] && gameField[1][0] === getAnotherPlayer(actualPlayer) && gameField[0][0] === ' ') {
+         gameField[0][0] = actualPlayer;
+      }
+      else if (gameField[0][1] === gameField[1][1] && gameField[0][1] === getAnotherPlayer(actualPlayer) && gameField[2][1] === ' ') {
+         gameField[2][1] = actualPlayer;
+      }
+      else if (gameField[0][2] === gameField[1][2] && gameField[0][2] === getAnotherPlayer(actualPlayer) && gameField[2][2] === ' ') {
+         gameField[2][2] = actualPlayer;
+      }
+      else if (gameField[0][2] === gameField[2][2] && gameField[0][2] === getAnotherPlayer(actualPlayer) && gameField[1][2] === ' ') {
+         gameField[1][2] = actualPlayer;
+      }
+      else if (gameField[1][2] === gameField[2][2] && gameField[1][2] === getAnotherPlayer(actualPlayer) && gameField[0][2] === ' ') {
+         gameField[0][2] = actualPlayer;
+      }
+      else if (gameField[0][0] === gameField[1][1] && gameField[0][0] === getAnotherPlayer(actualPlayer) && gameField[2][2] === ' ') {
+         gameField[2][2] = actualPlayer;
+      }
+      else if (gameField[0][0] === gameField[2][2] && gameField[0][0] === getAnotherPlayer(actualPlayer) && gameField[1][1] === ' ') {
+         gameField[1][1] = actualPlayer;
+      }
+      else if (gameField[1][1] === gameField[2][2] && gameField[1][1] === getAnotherPlayer(actualPlayer) && gameField[0][0] === ' ') {
+         gameField[0][0] = actualPlayer;
+      }
+      else if (gameField[2][0] === gameField[1][1] && gameField[2][0] === getAnotherPlayer(actualPlayer) && gameField[0][2] === ' ') {
+         gameField[0][2] = actualPlayer;
+      }
+      else if (gameField[2][0] === gameField[0][2] && gameField[2][0] === getAnotherPlayer(actualPlayer) && gameField[1][1] === ' ') {
+         gameField[1][1] = actualPlayer;
+      }
+      else if (gameField[1][1] === gameField[0][2] && gameField[1][1] === getAnotherPlayer(actualPlayer) && gameField[2][0] === ' ') {
+         gameField[2][0] = actualPlayer;
+      }
+      else {
+         /*
+         let isAImove = true;
+         while (isAImove) {
+            let randNum = Math.floor(Math.random() * 4) + 1;
+            if (randNum === 1) { 
+               gameField[1][0] = actualPlayer;
+            }
+            else if (randNum === 2)  gameField[0][1] = actualPlayer;
+            else if (randNum === 3)  gameField[1][2] = actualPlayer;
+            else if (randNum === 4)  gameField[2][1] = actualPlayer;
+         }
+         */
 
-
-
-
-   actualPlayer = actualPlayer === 'X' ? 'O' : 'X';
+         
+         gameField[0][0] = actualPlayer;
+      }
+      actualPlayer = actualPlayer === 'X' ? 'O' : 'X';
    }
 
    isWin = isGameWin();  
    if(isWin) {
       isGameRun = false;
    }
-
+   EmptySpace = isEmptySpace();
+   if (!EmptySpace) {
+      isGameRun = false;
+   }
 }
 
 
@@ -259,4 +361,13 @@ if (isWin) {
    console.log();
    console.log('Gratulálunk ' + winnerPlayer + '! Nyertél.');
 }
+if (!EmptySpace) {
+   console.clear();
+   printGameField();
+   console.log();
+   printError('');
+   console.log();
+   console.log('Döntetlen!!!');
+}
+
 
